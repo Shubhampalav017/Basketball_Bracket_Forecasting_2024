@@ -1,0 +1,1034 @@
+---
+title: "March Machine Learning Mania 2024"
+author: Shubham Palav
+format: 
+  html:
+    theme:
+          light: flaty
+          dark: darkly
+    toc: true
+    code-fold: true
+    code-tools: true
+    code-overflow: wrap
+---
+
+
+::: {.cell .markdown}
+#   Data Loading.
+:::
+
+::: {.cell .code execution_count="1"}
+```
+
+```
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+```
+:::
+
+::: {.cell .code execution_count="2"}
+``` python
+# Data Section 1 - The Basics:
+MTeams= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MTeams.csv')
+WTeams= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WTeams.csv')
+
+MSeasons= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MSeasons.csv')
+WSeasons= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WSeasons.csv')
+
+MNCAATourneySeeds= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneySeeds.csv')
+WNCAATourneySeeds= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneySeeds.csv')
+
+# Data Section 2 - Team Box Scores
+MRegularSeasonCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MRegularSeasonCompactResults.csv')
+WRegularSeasonCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WRegularSeasonCompactResults.csv')
+
+MNCAATourneyCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneyCompactResults.csv')
+WNCAATourneyCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneyCompactResults.csv')
+
+MRegularSeasonDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MRegularSeasonDetailedResults.csv')
+WRegularSeasonDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WRegularSeasonDetailedResults.csv')
+
+MNCAATourneyDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneyDetailedResults.csv')
+WNCAATourneyDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneyDetailedResults.csv')
+
+# Data Section 2 - Team Box Scores
+MRegularSeasonCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MRegularSeasonCompactResults.csv')
+WRegularSeasonCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WRegularSeasonCompactResults.csv')
+
+MNCAATourneyCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneyCompactResults.csv')
+WNCAATourneyCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneyCompactResults.csv')
+
+MRegularSeasonDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MRegularSeasonDetailedResults.csv')
+WRegularSeasonDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WRegularSeasonDetailedResults.csv')
+
+MNCAATourneyDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneyDetailedResults.csv')
+WNCAATourneyDetailedResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneyDetailedResults.csv')
+
+# Data Section 3 - Geography
+Cities= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\Cities.csv')
+
+MGameCities= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MGameCities.csv')
+WGameCities= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WGameCities.csv')
+
+
+# Data Section 5 - Supplements
+MTeamCoaches= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MTeamCoaches.csv')
+
+Conferences= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\Conferences.csv')
+
+MTeamConferences= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MTeamConferences.csv')
+WTeamConferences= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WTeamConferences.csv')
+
+MConferenceTourneyGames= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MConferenceTourneyGames.csv')
+
+MSecondaryTourneyTeams= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MSecondaryTourneyTeams.csv')
+
+MSecondaryTourneyCompactResults= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MSecondaryTourneyCompactResults.csv')
+
+MTeamSpellings= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MTeamSpellings.csv', encoding='ISO-8859-1')
+WTeamSpellings= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WTeamSpellings.csv', encoding='ISO-8859-1')
+
+MNCAATourneySlots= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneySlots.csv')
+WNCAATourneySlots= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\WNCAATourneySlots.csv')  
+
+MNCAATourneySeedRoundSlots= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\MNCAATourneySeedRoundSlots.csv')
+
+```
+:::
+
+::: {.cell .code execution_count="3"}
+``` python
+# Data Section 6 - Others
+tourney_seeds_2024= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\seeds.csv')
+
+sample_submission= pd.read_csv('D:\Source\Orion_innovation_internship_repos\Basketball_Bracket_Forecasting_2024\Datasets\sample_submission.csv')
+```
+:::
+
+::: {.cell .markdown}
+# 1.  Exploratory Data Analysis (EDA):
+:::
+
+::: {.cell .markdown}
+# Men
+:::
+
+::: {.cell .code execution_count="4"}
+``` python
+MTeams.head()
+```
+
+::: {.output .execute_result execution_count="4"}
+```{=html}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TeamID</th>
+      <th>TeamName</th>
+      <th>FirstD1Season</th>
+      <th>LastD1Season</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1101</td>
+      <td>Abilene Chr</td>
+      <td>2014</td>
+      <td>2024</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1102</td>
+      <td>Air Force</td>
+      <td>1985</td>
+      <td>2024</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1103</td>
+      <td>Akron</td>
+      <td>1985</td>
+      <td>2024</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1104</td>
+      <td>Alabama</td>
+      <td>1985</td>
+      <td>2024</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1105</td>
+      <td>Alabama A&amp;M</td>
+      <td>2000</td>
+      <td>2024</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+:::
+:::
+
+::: {.cell .code execution_count="5"}
+``` python
+MTeams['D1Seasons'] = MTeams['LastD1Season'] - MTeams['FirstD1Season'] 
+df_d1_2024 = MTeams[MTeams['LastD1Season'] == 2024]
+fewest_d1_seasons = df_d1_2024.nsmallest(20, 'D1Seasons')
+
+plt.figure(figsize=(10, 6))
+plt.bar(fewest_d1_seasons['TeamName'], fewest_d1_seasons['D1Seasons'], color='skyblue')
+plt.title('Teams with the Fewest D1 Seasons (up to 2024)')
+plt.xlabel('Team Name')
+plt.ylabel('Number of D1 Seasons')
+plt.xticks(rotation=90)
+plt.tight_layout()
+
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/21b3bd67b9957a5da0237671f9a37ef03db852b7.png)
+:::
+:::
+
+::: {.cell .code execution_count="6"}
+``` python
+def plot_regions(df):
+    region_w_counts = df['RegionW'].value_counts()
+    region_x_counts = df['RegionX'].value_counts()
+    region_y_counts = df['RegionY'].value_counts()
+    region_z_counts = df['RegionZ'].value_counts()
+    
+    region_counts = pd.DataFrame({
+        'RegionW': region_w_counts,
+        'RegionX': region_x_counts,
+        'RegionY': region_y_counts,
+        'RegionZ': region_z_counts
+    })
+
+    region_counts = region_counts.fillna(0).astype(int)
+
+    fig, ax = plt.subplots(2, 2, figsize=(14, 10), sharey=True)
+
+    ax[0, 0].bar(region_counts.index, region_counts['RegionW'], color='blue')
+    ax[0, 0].set_title('Region W Counts')
+    ax[0, 0].set_ylabel('Counts')
+    ax[0, 0].tick_params(axis='x', rotation=90)
+
+    ax[0, 1].bar(region_counts.index, region_counts['RegionX'], color='red')
+    ax[0, 1].set_title('Region X Counts')
+    ax[0, 1].tick_params(axis='x', rotation=90)
+
+    ax[1, 0].bar(region_counts.index, region_counts['RegionY'], color='orange')
+    ax[1, 0].set_title('Region Y Counts')
+    ax[1, 0].set_ylabel('Counts')
+    ax[1, 0].set_xlabel('Region')
+    ax[1, 0].tick_params(axis='x', rotation=90)
+
+    ax[1, 1].bar(region_counts.index, region_counts['RegionZ'], color='yellow')
+    ax[1, 1].set_title('Region Z Counts')
+    ax[1, 1].set_xlabel('Region')
+    ax[1, 1].tick_params(axis='x', rotation=90)
+
+    plt.tight_layout()
+    plt.show()
+
+plot_regions(MSeasons)
+```
+
+::: {.output .display_data}
+![](img/d98db4caa8575dfb4e12ade6b5c6f81d79eeb645.png)
+:::
+:::
+
+::: {.cell .code execution_count="7"}
+``` python
+tourney_seeds_2024_MTeam = tourney_seeds_2024[tourney_seeds_2024['Tournament'] == 'M']
+tourney_seeds_2024_MTeam = pd.merge(tourney_seeds_2024_MTeam, MTeams, on='TeamID', how='left')
+tourney_seeds_2024_MTeam.head()
+```
+
+::: {.output .execute_result execution_count="7"}
+```{=html}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tournament</th>
+      <th>Seed</th>
+      <th>TeamID</th>
+      <th>TeamName</th>
+      <th>FirstD1Season</th>
+      <th>LastD1Season</th>
+      <th>D1Seasons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M</td>
+      <td>W01</td>
+      <td>1163</td>
+      <td>Connecticut</td>
+      <td>1985</td>
+      <td>2024</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>M</td>
+      <td>W02</td>
+      <td>1235</td>
+      <td>Iowa St</td>
+      <td>1985</td>
+      <td>2024</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>M</td>
+      <td>W03</td>
+      <td>1228</td>
+      <td>Illinois</td>
+      <td>1985</td>
+      <td>2024</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M</td>
+      <td>W04</td>
+      <td>1120</td>
+      <td>Auburn</td>
+      <td>1985</td>
+      <td>2024</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>M</td>
+      <td>W05</td>
+      <td>1361</td>
+      <td>San Diego St</td>
+      <td>1985</td>
+      <td>2024</td>
+      <td>39</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+:::
+:::
+
+::: {.cell .code execution_count="8"}
+``` python
+plt.figure(figsize=(10, 6))
+plt.hist(tourney_seeds_2024_MTeam['FirstD1Season'], bins=30, color='skyblue', edgecolor='black')
+
+
+plt.xlabel('FirstD1Season')
+plt.ylabel('Frequency')
+plt.title('Histogram of FirstD1Season in 2024 Tournament Seeds')
+
+
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/4b694b93411b7573ba27d3054ec079711456e32f.png)
+:::
+:::
+
+::: {.cell .markdown}
+# Women
+:::
+
+::: {.cell .code execution_count="9"}
+``` python
+tourney_seeds_2024_WTeam = tourney_seeds_2024[tourney_seeds_2024['Tournament'] == 'W']
+tourney_seeds_2024_WTeam = pd.merge(tourney_seeds_2024_WTeam, WTeams, on='TeamID', how='left')
+tourney_seeds_2024_WTeam.head()
+```
+
+::: {.output .execute_result execution_count="9"}
+```{=html}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tournament</th>
+      <th>Seed</th>
+      <th>TeamID</th>
+      <th>TeamName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>W</td>
+      <td>W01</td>
+      <td>3376</td>
+      <td>South Carolina</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>W</td>
+      <td>W02</td>
+      <td>3323</td>
+      <td>Notre Dame</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>W</td>
+      <td>W03</td>
+      <td>3333</td>
+      <td>Oregon St</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>W</td>
+      <td>W04</td>
+      <td>3231</td>
+      <td>Indiana</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>W</td>
+      <td>W05</td>
+      <td>3328</td>
+      <td>Oklahoma</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+:::
+:::
+
+::: {.cell .markdown}
+# Seed Rank
+
+Men
+:::
+
+::: {.cell .code execution_count="10"}
+``` python
+MNCAATourneyCompactResults_2003 = MNCAATourneyCompactResults[MNCAATourneyCompactResults['Season']>=2003]
+MNCAATourneyCompactResults_2003
+
+df_merged_seeds_M = pd.merge(MNCAATourneyCompactResults_2003, MNCAATourneySeeds[['Season','TeamID','Seed']], left_on=['Season','WTeamID'], right_on=['Season','TeamID'], how='left').rename(columns={'Seed':'WSeed'})
+df_merged_seeds_M = pd.merge(df_merged_seeds_M, MNCAATourneySeeds[['Season','TeamID','Seed']], left_on=['Season','LTeamID'], right_on=['Season','TeamID'], how='left').rename(columns={'Seed':'LSeed'})
+
+df_merged_seeds_M['WRank'] = df_merged_seeds_M['WSeed'].str[1:3].astype(int)
+df_merged_seeds_M['LRank'] = df_merged_seeds_M['LSeed'].str[1:3].astype(int)
+df_merged_seeds_M['RankDiff'] = df_merged_seeds_M['LRank'] - df_merged_seeds_M['WRank']
+
+columns_to_delete = ['TeamID_x', 'TeamID_y']
+df_merged_seeds_M = df_merged_seeds_M.drop(columns=columns_to_delete)
+df_merged_seeds_M.head()
+```
+
+::: {.output .execute_result execution_count="10"}
+```{=html}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Season</th>
+      <th>DayNum</th>
+      <th>WTeamID</th>
+      <th>WScore</th>
+      <th>LTeamID</th>
+      <th>LScore</th>
+      <th>WLoc</th>
+      <th>NumOT</th>
+      <th>WSeed</th>
+      <th>LSeed</th>
+      <th>WRank</th>
+      <th>LRank</th>
+      <th>RankDiff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2003</td>
+      <td>134</td>
+      <td>1421</td>
+      <td>92</td>
+      <td>1411</td>
+      <td>84</td>
+      <td>N</td>
+      <td>1</td>
+      <td>X16b</td>
+      <td>X16a</td>
+      <td>16</td>
+      <td>16</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2003</td>
+      <td>136</td>
+      <td>1112</td>
+      <td>80</td>
+      <td>1436</td>
+      <td>51</td>
+      <td>N</td>
+      <td>0</td>
+      <td>Z01</td>
+      <td>Z16</td>
+      <td>1</td>
+      <td>16</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2003</td>
+      <td>136</td>
+      <td>1113</td>
+      <td>84</td>
+      <td>1272</td>
+      <td>71</td>
+      <td>N</td>
+      <td>0</td>
+      <td>Z10</td>
+      <td>Z07</td>
+      <td>10</td>
+      <td>7</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2003</td>
+      <td>136</td>
+      <td>1141</td>
+      <td>79</td>
+      <td>1166</td>
+      <td>73</td>
+      <td>N</td>
+      <td>0</td>
+      <td>Z11</td>
+      <td>Z06</td>
+      <td>11</td>
+      <td>6</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2003</td>
+      <td>136</td>
+      <td>1143</td>
+      <td>76</td>
+      <td>1301</td>
+      <td>74</td>
+      <td>N</td>
+      <td>1</td>
+      <td>W08</td>
+      <td>W09</td>
+      <td>8</td>
+      <td>9</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+:::
+:::
+
+::: {.cell .markdown}
+This histogram shows the difference in seed rank between the two teams
+(not considering the regions). Negative means the winner has a lower
+seed rank.
+
+More than 60% of the games are won by the higher ranked team. But more
+than 10% of the games were won by teams ranked significantly lower.
+Therefore, the seed ranking of the competition team cannot accurately
+predict the outcome of the competition.
+:::
+
+::: {.cell .code execution_count="11"}
+``` python
+plt.figure(figsize=(12, 6))
+plt.hist(df_merged_seeds_M['RankDiff'], bins=10, color='skyblue', edgecolor='black')
+plt.title('Distribution of Rank Differences')
+plt.xlabel('Rank Difference')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/bf13ee5a237492f23204f9ca45e4e20d5a7a4cbc.png)
+:::
+:::
+
+::: {.cell .markdown}
+# Women
+:::
+
+::: {.cell .code execution_count="12"}
+``` python
+WNCAATourneyCompactResults_2010 = WNCAATourneyCompactResults[WNCAATourneyCompactResults['Season']>=2010]
+WNCAATourneyCompactResults_2010
+
+df_merged_seeds_W = pd.merge(WNCAATourneyCompactResults_2010, WNCAATourneySeeds[['Season','TeamID','Seed']], left_on=['Season','WTeamID'], right_on=['Season','TeamID'], how='left').rename(columns={'Seed':'WSeed'})
+df_merged_seeds_W = pd.merge(df_merged_seeds_W, WNCAATourneySeeds[['Season','TeamID','Seed']], left_on=['Season','LTeamID'], right_on=['Season','TeamID'], how='left').rename(columns={'Seed':'LSeed'})
+
+df_merged_seeds_W['WRank'] = df_merged_seeds_W['WSeed'].str[1:3].astype(int)
+df_merged_seeds_W['LRank'] = df_merged_seeds_W['LSeed'].str[1:3].astype(int)
+df_merged_seeds_W['RankDiff'] = df_merged_seeds_W['LRank'] - df_merged_seeds_W['WRank']
+
+columns_to_delete = ['TeamID_x', 'TeamID_y']
+df_merged_seeds_W = df_merged_seeds_W.drop(columns=columns_to_delete)
+df_merged_seeds_W.head()
+```
+
+::: {.output .execute_result execution_count="12"}
+```{=html}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Season</th>
+      <th>DayNum</th>
+      <th>WTeamID</th>
+      <th>WScore</th>
+      <th>LTeamID</th>
+      <th>LScore</th>
+      <th>WLoc</th>
+      <th>NumOT</th>
+      <th>WSeed</th>
+      <th>LSeed</th>
+      <th>WRank</th>
+      <th>LRank</th>
+      <th>RankDiff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2010</td>
+      <td>138</td>
+      <td>3124</td>
+      <td>69</td>
+      <td>3201</td>
+      <td>55</td>
+      <td>N</td>
+      <td>0</td>
+      <td>X04</td>
+      <td>X13</td>
+      <td>4</td>
+      <td>13</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2010</td>
+      <td>138</td>
+      <td>3173</td>
+      <td>67</td>
+      <td>3395</td>
+      <td>66</td>
+      <td>N</td>
+      <td>0</td>
+      <td>X08</td>
+      <td>X09</td>
+      <td>8</td>
+      <td>9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2010</td>
+      <td>138</td>
+      <td>3181</td>
+      <td>72</td>
+      <td>3214</td>
+      <td>37</td>
+      <td>H</td>
+      <td>0</td>
+      <td>X02</td>
+      <td>X15</td>
+      <td>2</td>
+      <td>15</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2010</td>
+      <td>138</td>
+      <td>3199</td>
+      <td>75</td>
+      <td>3256</td>
+      <td>61</td>
+      <td>H</td>
+      <td>0</td>
+      <td>W03</td>
+      <td>W14</td>
+      <td>3</td>
+      <td>14</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2010</td>
+      <td>138</td>
+      <td>3207</td>
+      <td>62</td>
+      <td>3265</td>
+      <td>42</td>
+      <td>N</td>
+      <td>0</td>
+      <td>X05</td>
+      <td>X12</td>
+      <td>5</td>
+      <td>12</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+:::
+:::
+
+::: {.cell .code execution_count="13"}
+``` python
+plt.figure(figsize=(12, 6))
+plt.hist(df_merged_seeds_W['RankDiff'], bins=10, color='skyblue', edgecolor='black')
+plt.title('Distribution of Rank Differences')
+plt.xlabel('Rank Difference')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/8f6c58fbc85044bb8b6d1b4262fcfef8904f537a.png)
+:::
+:::
+
+::: {.cell .markdown}
+# Tourney Compact Results
+
+Men
+:::
+
+::: {.cell .code execution_count="14"}
+``` python
+
+# Calculate average scores for wins and losses each year
+average_scores = MNCAATourneyCompactResults_2003.groupby(['Season'])[['WScore', 'LScore']].mean().reset_index()
+average_scores
+# Melt the DataFrame to have separate columns for win and loss scores
+average_scores_melted = average_scores.melt(id_vars=['Season'], value_vars=['WScore', 'LScore'], var_name='Outcome', value_name='Average Score')
+average_scores_melted
+
+plt.figure(figsize=(12, 6))
+sns.barplot(x='Season', y='Average Score', hue='Outcome', data=average_scores_melted, palette={'WScore': 'lightseagreen', 'LScore': 'plum'})
+plt.title('Average Win and Loss Scores by Year')
+plt.xlabel('Season')
+plt.ylabel('Average Score')
+plt.legend(title='Outcome', loc='upper right')
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/12f2ab5ee7c752032993ac21aaf1a1c81f3533c7.png)
+:::
+:::
+
+::: {.cell .code execution_count="15"}
+``` python
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.hist(MNCAATourneyCompactResults_2003['WScore'], bins=20, color='lightseagreen', alpha=0.7, label='Winning Team')
+plt.hist(MNCAATourneyCompactResults_2003['LScore'], bins=20, color='plum', alpha=0.7, label='Losing Team')
+plt.title('Distribution of Scores')
+plt.xlabel('Score')
+plt.ylabel('Frequency')
+plt.legend()
+
+# Visualize the distribution of locations
+plt.subplot(1, 2, 2)
+MNCAATourneyCompactResults_2003['WLoc'].value_counts().plot(kind='bar', color='skyblue', alpha=0.7)
+plt.title('Distribution of Locations')
+plt.xlabel('Location')
+plt.ylabel('Count')
+
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/8ca5aaedd900e2f11c009cef335c942366ab840f.png)
+:::
+:::
+
+::: {.cell .markdown}
+# Finding
+
+This historical data of team-level box scores for NCAA men tournaments
+starts with the 2003 season.
+
+A more ideal normal distribution can be seen in the past scores of the
+winning and losing teams.
+
+There is no \'A\' in the \'Location\', and all most all of them are
+\'N\'. Which means we might don\'t need consider the effect by location.
+:::
+
+::: {.cell .markdown}
+# Women
+:::
+
+::: {.cell .code execution_count="16"}
+``` python
+average_scores = WNCAATourneyCompactResults_2010.groupby(['Season'])[['WScore', 'LScore']].mean().reset_index()
+average_scores
+# Melt the DataFrame to have separate columns for win and loss scores
+average_scores_melted = average_scores.melt(id_vars=['Season'], value_vars=['WScore', 'LScore'], var_name='Outcome', value_name='Average Score')
+average_scores_melted
+
+plt.figure(figsize=(12, 6))
+sns.barplot(x='Season', y='Average Score', hue='Outcome', data=average_scores_melted, palette={'WScore': 'lightseagreen', 'LScore': 'plum'})
+plt.title('Average Win and Loss Scores by Year')
+plt.xlabel('Season')
+plt.ylabel('Average Score')
+plt.legend(title='Outcome', loc='upper right')
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/8223f2ed11395de43887c3e0dfff01f1d722c6be.png)
+:::
+:::
+
+::: {.cell .code execution_count="17"}
+``` python
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.hist(WNCAATourneyCompactResults_2010['WScore'], bins=20, color='lightseagreen', alpha=0.7, label='Winning Team')
+plt.hist(WNCAATourneyCompactResults_2010['LScore'], bins=20, color='plum', alpha=0.7, label='Losing Team')
+plt.title('Distribution of Scores')
+plt.xlabel('Score')
+plt.ylabel('Frequency')
+plt.legend()
+
+# Visualize the distribution of locations
+plt.subplot(1, 2, 2)
+WNCAATourneyCompactResults_2010['WLoc'].value_counts().plot(kind='bar', color='skyblue', alpha=0.7)
+plt.title('Distribution of Locations')
+plt.xlabel('Location')
+plt.ylabel('Count')
+
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/c06f902569ec060e7520f25c6ec1a8f1f7c0e68c.png)
+:::
+:::
+
+::: {.cell .markdown}
+# Tourney Compact Results
+:::
+
+::: {.cell .code execution_count="18"}
+``` python
+
+sns.set(style="whitegrid")
+
+
+fig, axes = plt.subplots(3, 2, figsize=(15, 15))
+
+# Men's Winning Scores
+sns.histplot(MNCAATourneyCompactResults['WScore'], bins=30, kde=True, ax=axes[0, 0], color='blue')
+axes[0, 0].set_title('Men\'s Winning Scores Distribution')
+axes[0, 0].set_xlabel('Score')
+axes[0, 0].set_ylabel('Frequency')
+
+# Men's Losing Scores
+sns.histplot(MNCAATourneyCompactResults['LScore'], bins=30, kde=True, ax=axes[0, 1], color='red')
+axes[0, 1].set_title('Men\'s Losing Scores Distribution')
+axes[0, 1].set_xlabel('Score')
+axes[0, 1].set_ylabel('Frequency')
+
+# Men's Number of Overtimes
+sns.histplot(MNCAATourneyCompactResults['NumOT'], bins=30, kde=False, ax=axes[1, 0], color='purple')
+axes[1, 0].set_title('Men\'s Number of Overtimes Distribution')
+axes[1, 0].set_xlabel('Number of Overtimes')
+axes[1, 0].set_ylabel('Frequency')
+
+# Women's Winning Scores
+sns.histplot(WNCAATourneyCompactResults['WScore'], bins=30, kde=True, ax=axes[1, 1], color='blue')
+axes[1, 1].set_title('Women\'s Winning Scores Distribution')
+axes[1, 1].set_xlabel('Score')
+axes[1, 1].set_ylabel('Frequency')
+
+# Women's Losing Scores
+sns.histplot(WNCAATourneyCompactResults['LScore'], bins=30, kde=True, ax=axes[2, 0], color='red')
+axes[2, 0].set_title('Women\'s Losing Scores Distribution')
+axes[2, 0].set_xlabel('Score')
+axes[2, 0].set_ylabel('Frequency')
+
+# Women's Number of Overtimes
+sns.histplot(WNCAATourneyCompactResults['NumOT'], bins=30, kde=False, ax=axes[2, 1], color='purple')
+axes[2, 1].set_title('Women\'s Number of Overtimes Distribution')
+axes[2, 1].set_xlabel('Number of Overtimes')
+axes[2, 1].set_ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/1ce3b7683da6489baa5475451dd93fd201c5425c.png)
+:::
+:::
+
+::: {.cell .markdown}
+Both men\'s and women\'s tournaments have similar patterns in terms of
+the distribution of scores.
+
+Winning scores tend to be higher and more spread out compared to losing
+scores.
+
+Overtime games are rare in both tournaments, indicating that most games
+are decided within the regular time.
+:::
+
+::: {.cell .code execution_count="19"}
+``` python
+
+# Plotting histograms for WScore, LScore, and NumOT
+fig, axes = plt.subplots(2, 3, figsize=(18, 12))
+fig.suptitle('Score and Overtime Distributions')
+
+# Women's dataset
+sns.histplot(WRegularSeasonCompactResults['WScore'], bins=30, kde=True, ax=axes[0, 0]).set_title('Women - Winning Score')
+sns.histplot(WRegularSeasonCompactResults['LScore'], bins=30, kde=True, ax=axes[0, 1]).set_title('Women - Losing Score')
+sns.histplot(WRegularSeasonCompactResults['NumOT'], bins=30, kde=True, ax=axes[0, 2]).set_title('Women - Number of Overtimes')
+
+# Men's dataset
+sns.histplot(MRegularSeasonCompactResults['WScore'], bins=30, kde=True, ax=axes[1, 0]).set_title('Men - Winning Score')
+sns.histplot(MRegularSeasonCompactResults['LScore'], bins=30, kde=True, ax=axes[1, 1]).set_title('Men - Losing Score')
+sns.histplot(MRegularSeasonCompactResults['NumOT'], bins=30, kde=True, ax=axes[1, 2]).set_title('Men - Number of Overtimes')
+
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+```
+
+::: {.output .display_data}
+![](img/d7d1a92d68cde8407bb7537fb7339422d8a18c2b.png)
+:::
+:::
+
+::: {.cell .markdown}
+-The x-axis represents the range of scores achieved by teams.
+
+-The y-axis represents the frequency (count) of games that fall within
+each score range.
+:::
+
+::: {.cell .code execution_count="20"}
+``` python
+# Trends over seasons - Average Winning Score per Season
+womens_trend = WRegularSeasonCompactResults.groupby('Season')['WScore'].mean().reset_index()
+mens_trend = MRegularSeasonCompactResults.groupby('Season')['WScore'].mean().reset_index()
+
+# Plotting trends over seasons
+fig, axes = plt.subplots(1, 2, figsize=(18, 6))
+fig.suptitle('Average Winning Score per Season')
+
+sns.lineplot(data=womens_trend, x='Season', y='WScore', ax=axes[0]).set_title('Women - Average Winning Score per Season')
+sns.lineplot(data=mens_trend, x='Season', y='WScore', ax=axes[1]).set_title('Men - Average Winning Score per Season')
+
+plt.xticks(rotation=90)
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+```
+
+::: {.output .display_data}
+![](img/fd1dd70e2c19b5a2283742964626d3a3fa6b4e44.png)
+:::
+:::

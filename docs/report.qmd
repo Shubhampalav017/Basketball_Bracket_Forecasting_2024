@@ -1,0 +1,36 @@
+---
+title: "March Machine Learning Mania 2024"
+author: Shubham Palav
+format: 
+  html:
+    theme:
+          light: flaty
+          dark: darkly
+    toc: true
+    code-fold: true
+    code-tools: true
+    code-overflow: wrap
+---
+
+## ABSTRACT
+
+- The "March Machine Learning Mania 2024" project aims to forecast the outcomes of the 2024 NCAA Basketball Tournaments by analyzing historical data and presenting a portfolio of brackets for both the men's and women's divisions. 
+- The NCAA (National Collegiate Athletic Association) is a prominent American organization that governs college athletics and organizes the highly anticipated collegiate basketball tournaments, known as "March Madness." This single-elimination tournament, held annually in March and April, features 68 elite college teams competing for the national championship. The project leverages machine learning techniques to predict game results, offering insights and forecasts for the 2024 tournaments.
+
+You can check the [Github](https://github.com/Shubhampalav017/Basketball_Bracket_Forecasting_2024) repository for my project.
+
+![](NCCA.jpg)
+
+## EDA 
+
+- pandas to be able to read data
+- matplotlib to plot bar charts and basic histograms
+- seaborn to plot box charts easily and then subplots
+- sklearn for machine learning implementation
+
+{{< include eda.qmd >}}
+
+## MODELING
+{{< include ml.qmd >}}
+
+![](MPrediction.png)
