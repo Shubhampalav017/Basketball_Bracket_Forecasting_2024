@@ -5,7 +5,7 @@ import pandas as pd
 # Load data
 @st.cache_data 
 def load_data():
-    return pd.read_csv('.\Data\df_historic_tourney_features.csv')
+    return pd.read_csv('.\myapp\Data\df_historic_tourney_features.csv')
 
 df = load_data()
 
