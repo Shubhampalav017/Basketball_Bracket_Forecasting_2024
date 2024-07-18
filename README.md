@@ -21,7 +21,6 @@ The National Collegiate Athletic Association(NCAA) is the American organization 
 - `python -m venv .venv`
 - `pip install -r requirements.txt`
 
-Report link : https://shubhampalav017.github.io/Basketball_Bracket_Forecasting_2024/
-
+Report link : https://shubhampalav017.github.io/Basketball_Bracket_Forecasting_2024/docs_file/report.html
 
 ![alt text](NCCA.jpg)
