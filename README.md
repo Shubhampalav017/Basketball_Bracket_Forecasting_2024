@@ -15,4 +15,13 @@ The National Collegiate Athletic Association(NCAA) is the American organization 
 
 "March Madness" refers to the annual NCAA Basketball Tournament, a single-elimination college basketball competition that takes place in the United States. The tournament typically occurs in March and April, involving 68 college basketball teams from the Division I level of the National Collegiate Athletic Association (NCAA). The competition culminates with the crowning of the national champion.
 
+## Requirements
+
+- python 3.9
+- `python -m venv .venv`
+- `pip install -r requirements.txt`
+
+Report link : https://shubhampalav017.github.io/Basketball_Bracket_Forecasting_2024/
+
+
 ![alt text](NCCA.jpg)
